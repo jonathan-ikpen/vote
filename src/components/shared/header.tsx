@@ -19,8 +19,8 @@ const HomeHeader = () => {
                     </Link>
                 </Button>
                 <Button variant={'link'} asChild>
-                    <Link href="/signin">
-                        Login
+                    <Link href="/vote">
+                        Vote
                     </Link>
                 </Button>
             </div>

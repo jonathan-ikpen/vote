@@ -205,8 +205,8 @@ export function RegisterForm() {
                 </div>
                 <div className="mt-4 text-center text-sm">
                     Already registered?{" "}
-                    <Link href="/signin" className="underline">
-                        Sign in
+                    <Link href="/vote" className="underline">
+                        Vote
                     </Link>
                 </div>
             </CardContent>
