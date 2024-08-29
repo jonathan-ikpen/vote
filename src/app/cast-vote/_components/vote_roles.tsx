@@ -19,7 +19,7 @@ import { roles } from "@/data/roles"
 import { ConstetantCard } from "@/components/shared/contestant_card"
 import Image from "../../../../public/images/girl1.jpg"
 import { contestants } from "@/data/contestants"
-import { filterRolesObj, filterRolesStr } from "@/lib/utils"
+import { filterRolesObj, filterRolesStr, formatRoleStr } from "@/lib/utils"
 
 export function RoleTabs() {
     const presidents = filterRolesObj(contestants, "president");
@@ -31,7 +31,7 @@ export function RoleTabs() {
             <TabsList className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0">
                 {roles.map((role) => (
                     <TabsTrigger className="text-left" value={role} key={role}>
-                        <Link href={`#${role}`} className="font-semibold text-primary">{role}</Link>   
+                        <Link href={`#${role}`} className="font-semibold text-primary">{formatRoleStr(role)}</Link>   
                     </TabsTrigger>
                 ))}
             </TabsList>
@@ -40,9 +40,9 @@ export function RoleTabs() {
                     <TabsContent value={role} key={role}>
                         <Card x-chunk="dashboard-04-chunk-1">
                             <CardHeader>
-                                <CardTitle>{role}</CardTitle>
+                                <CardTitle>{formatRoleStr(role)}</CardTitle>
                             </CardHeader>
-                            <CardContent className="flex gap-8">
+                            <CardContent className="flex gap-8 flex-wrap">
                                 {filterRolesObj(contestants, role).map((president) => (
                                     <ConstetantCard key={president.id} name={president.name} imagesrc={`${imagePath}${president.image}.jpg`} tagline={president.tagline} position={president.position} />
                                 ))}

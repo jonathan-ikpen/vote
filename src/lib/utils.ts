@@ -13,3 +13,7 @@ export function filterRolesObj(arr: { [key: string]: any }[], position: string) 
 export function filterRolesStr(arr: string[], query: string) {
   return arr.filter((el) => el.toLowerCase().trim() === query.toLowerCase().trim()).map((item) => item.split(' ').splice(1).join("_"));
 }
+
+export function formatRoleStr(str: string) {
+  return str.split("_").join(" ");
+}
