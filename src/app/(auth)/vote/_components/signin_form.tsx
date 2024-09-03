@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useVoterStore } from "@/store/voter"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -26,15 +27,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { LoaderCircle } from 'lucide-react';
+import { useState } from "react"
+import toast from "react-hot-toast"
 
-const FormSchema = z.object({
+
+const formSchema = z.object({
   id: z
     .string({
       required_error: "Please input your voters id.",
@@ -42,20 +40,33 @@ const FormSchema = z.object({
 })
 
 export function SignInForm() {
+  const { login } = useVoterStore()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      id: "",
+    }
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    setLoading(true)
     console.log(data)
-    router.push('/cast_vote')
+
+    setTimeout(() => {
+      const {isAuthenticated, error} = login(data.id);
+      if(error) toast.error(error);
+      if(isAuthenticated) router.push('/cast-vote')
+
+      setLoading(false)
+    }, 3000);
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Card className="w-full max-w-sm">
+        <Card className={`w-full max-w-sm`}>
             
         <CardHeader>
             <CardTitle className="text-2xl">Vote</CardTitle>
@@ -80,7 +91,10 @@ export function SignInForm() {
         </CardContent>
 
         <CardFooter>
-            <Button className="w-full">Proceed</Button>
+            <Button className="w-full flex gap-2 fanimate-pulse" disabled={loading}>
+              { loading ? <LoaderCircle className="animate-spin" /> : "" } {" "}
+              Proceed
+            </Button>
         </CardFooter>
 
         </Card>

@@ -1,9 +1,15 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import LogoNosh from "../../../public/logo-no-sh.png"
+import CountdownTimer from "./timer";
+import { useVoterStore } from "@/store/voter";
+import AvatarDropDown from "./avatar2";
 
 const HomeHeader = () => {
+    const {isAuthenticated} = useVoterStore();
+
   return (
         <div className="fsticky absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
             <Link href={'/'}>
@@ -12,7 +18,7 @@ const HomeHeader = () => {
             </h1>
                
             </Link>
-            <div className="flex gap-4">
+            <div className={`flex gap-4 ${isAuthenticated && "hidden"}`}>
                 <Button variant={'outline'} asChild>
                     <Link href="/register">
                         Register
@@ -23,6 +29,14 @@ const HomeHeader = () => {
                         Vote
                     </Link>
                 </Button>
+            </div>
+            <div className={`flex gap-4 items-center ${isAuthenticated ? "flex" : "hidden"}`}>
+                <div>
+                    <CountdownTimer hours={2} stopMessage="Time's up!" />
+                </div>
+                <div>
+                    <AvatarDropDown/>
+                </div>
             </div>
         </div>
         );

@@ -31,8 +31,8 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ hours, stopMessage }) =
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-      <div className="text-4xl font-bold text-gray-800">
+    <div className="flex flex-col items-center justify-center p-2 px-6 bg-white rounded-lg shadow-lg border border-gray-200">
+      <div className="text-sm md:text-xl font-bold text-gray-800">
         {isStopped ? stopMessage : formatTime(timeLeft)}
       </div>
       {/* {!isStopped && (
