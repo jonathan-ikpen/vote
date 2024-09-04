@@ -1,7 +1,8 @@
 import { contestants } from "@/data/contestants";
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { VoterState, ContestantsVoted, LoggedUser } from "@/types/voter";
+import { VoterState, ContestantsVoted, LoggedUser, StateStorage } from "@/types/voter";
+import { getCookie, setCookie, deleteCookie } from "@/app/actions";
 
 const initialData: ContestantsVoted = {
     president: "",
@@ -30,50 +31,6 @@ const getInitialState = () => {
         };
 };
 
-export const useVoterState = create<VoterState>((set) => ({
-    voterId: null,
-    user: null,
-    isAuthenticated: false,
-    loading: false,
-    error: null,
-    contestants_voted: initialData,
-    login: (voterId) =>  {
-        set({ loading: true, error: null });
-
-
-        if (voterId == "admin") {
-            set({
-                user: { voterId },
-                voterId: voterId,
-                isAuthenticated: true,
-            });
-            return {
-                user: { voterId },
-                voterId: voterId,
-                isAuthenticated: true,
-                loading: false,
-                error: null,
-            };
-        } else {
-            return {
-                user: null,
-                voterId: null,
-                isAuthenticated: false,
-                loading: false,
-                error: 'Invalid Voters ID',
-            };
-        }
-        
-    },
-    logout: () => {
-        localStorage.removeItem('user');
-        set({ user: null, voterId: null, isAuthenticated: false })
-    },
-    vote: (contestantId) => set((state) => ({ contestants_voted: {...state.contestants_voted, ...contestantId }})),
-    unvote: (position) => set((state) => ({ contestants_voted: { ...state.contestants_voted, position: "" }})),
-    reset: () => set((state) => ({ contestants_voted: initialData}))
-}))
-
 export const useVoterStore = create<VoterState>()(
     persist(
         (set, get) => ({
@@ -83,7 +40,7 @@ export const useVoterStore = create<VoterState>()(
           loading: false,
           error: null,
           contestants_voted: initialData,
-          login: (voterId) => {
+          login: async (voterId) => {
             set({ loading: true, error: null });
 
             if(voterId == "admin") {
@@ -92,6 +49,7 @@ export const useVoterStore = create<VoterState>()(
                 voterId: voterId,
                 isAuthenticated: true
                });
+               await setCookie(voterId)
                return {
                 user: { voterId },
                 voterId: voterId,
@@ -109,7 +67,8 @@ export const useVoterStore = create<VoterState>()(
                 }
             }
           },
-          logout: () => {
+          logout: async () => {
+            await deleteCookie()
             set({ user: null, voterId: null, isAuthenticated: false })
           },
           vote: (contestantId) => set((state) => ({ contestants_voted: {...state.contestants_voted, ...contestantId }})),
@@ -118,7 +77,7 @@ export const useVoterStore = create<VoterState>()(
         }),
         {
           name: 'user', // name of item in the storage (must be unique)
-          storage: createJSONStorage(() => localStorage), // (optional) by default the 'localStorage' is used
+          storage: createJSONStorage(() => sessionStorage), // (optional) by default the 'localStorage' is used
           partialize: (state) => ({ voterId: state.voterId, isAuthenticated: state.isAuthenticated }),
         },
     ),

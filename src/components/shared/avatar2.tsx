@@ -1,6 +1,7 @@
 "use client"
 
 import { useVoterStore } from "@/store/voter"
+import { useRouter } from "next/navigation"
 
 import {
     Avatar,
@@ -34,7 +35,13 @@ import {
   } from "@/components/ui/dropdown-menu"
   
   export default function AvatarDropDown() {
+    const router = useRouter()
     const { voterId, logout } = useVoterStore();
+
+    function handleLogout () {
+      logout()
+      router.push('/')
+    }
 
     return (
       <DropdownMenu>
@@ -63,7 +70,7 @@ import {
               <span>Help</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => logout()}>
+          <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
           </DropdownMenuItem>

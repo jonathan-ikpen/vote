@@ -1,4 +1,3 @@
-import { roles } from "@/data/roles"
 
 export interface User {
     voterId: string | null
@@ -24,6 +23,12 @@ export interface LoggedUser {
     error: string | null,
 }
 
+export interface StateStorage {
+    getItem: (name: string) => Promise<string | null>
+    setItem: (name: string, value: string) => Promise<void>
+    removeItem: (name: string) => Promise<void>
+}
+
 
 
 export interface VoterState {
@@ -33,8 +38,8 @@ export interface VoterState {
     loading: boolean
     error: string | null
     contestants_voted: ContestantsVoted
-    login: (voterId: string) => LoggedUser
-    logout: () => void
+    login: (voterId: string) => Promise<LoggedUser>
+    logout: () => Promise<void>
     vote: (contestantId: Partial<ContestantsVoted>) => void
     unvote: (position: Partial<ContestantsVoted>) => void
     reset: () => void

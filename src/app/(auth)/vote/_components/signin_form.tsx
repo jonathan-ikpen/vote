@@ -42,6 +42,7 @@ const formSchema = z.object({
 export function SignInForm() {
   const { login } = useVoterStore()
   const [loading, setLoading] = useState(false)
+  const [buttontxt, setButtontxt] = useState("Proceed")
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,12 +53,18 @@ export function SignInForm() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setLoading(true)
-    console.log(data)
+    setButtontxt("Loading")
 
-    setTimeout(() => {
-      const {isAuthenticated, error} = login(data.id);
-      if(error) toast.error(error);
-      if(isAuthenticated) router.push('/cast-vote')
+    setTimeout(async () => {
+      const {isAuthenticated, error} = await login(data.id);
+      if(error) {
+        setButtontxt("Proceed")
+        toast.error(error)
+      };
+      if(isAuthenticated) {
+        setButtontxt("Redirecting...")
+        router.push('/cast-vote')
+      }
 
       setLoading(false)
     }, 3000);
@@ -93,7 +100,7 @@ export function SignInForm() {
         <CardFooter>
             <Button className="w-full flex gap-2 fanimate-pulse" disabled={loading}>
               { loading ? <LoaderCircle className="animate-spin" /> : "" } {" "}
-              Proceed
+              {buttontxt}
             </Button>
         </CardFooter>
 
