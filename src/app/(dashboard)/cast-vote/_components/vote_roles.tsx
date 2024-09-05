@@ -22,6 +22,7 @@ import Image from "../../../../public/images/girl1.jpg"
 import { contestants } from "@/data/contestants"
 import { filterRolesObj, filterRolesStr, formatRoleStr } from "@/lib/utils"
 import { useVoterStore } from "@/store/voter"
+import toast from "react-hot-toast"
 
 export function RoleTabs() {
     const { vote, contestants_voted } = useVoterStore()
@@ -40,6 +41,19 @@ export function RoleTabs() {
             [position]: name, // Update only the contestant for the specific position
           }));
         vote({ [position]: name })
+    }
+
+    function handleSave(role: string) {
+        const formattedRole = formatRoleStr(role)
+        console.log(selectedContestants)
+        if(selectedContestants[role] !== '' && selectedContestants[role] !== undefined) {
+            const toastId = toast.loading(`saving ${formattedRole}`, { duration: 4000 })
+            toast.success(`saved ${formattedRole}`, {
+                id: toastId,
+            });
+        } else {
+            toast.error(`please choose a ${formattedRole}`)
+        }
     }
 
   return (
@@ -66,7 +80,7 @@ export function RoleTabs() {
                                 ))}
                             </CardContent>
                             <CardFooter className="border-t px-6 py-4">
-                                <Button>Save</Button>
+                                <Button onClick={() => handleSave(role)}>Save</Button>
                             </CardFooter>
                         </Card>
                     </TabsContent>
@@ -76,3 +90,5 @@ export function RoleTabs() {
     </Tabs>
   )
 }
+
+

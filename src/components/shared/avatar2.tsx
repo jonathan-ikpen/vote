@@ -15,7 +15,8 @@ import {
     LogOut,
     Settings,
     User,
-    CircleHelp
+    CircleHelp,
+    ChartNoAxesCombined
   } from "lucide-react"
   
   import { Button } from "@/components/ui/button"
@@ -33,6 +34,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
   
   export default function AvatarDropDown() {
     const router = useRouter()
@@ -65,9 +67,17 @@ import {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem> */}
-            <DropdownMenuItem>
-              <CircleHelp className="mr-2 h-4 w-4" />
-              <span>Help</span>
+            <DropdownMenuItem asChild>
+              <Link href={'https://wa.me/2348127964509'} target="blank">
+                <CircleHelp className="mr-2 h-4 w-4" />
+                <span>Help</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={'/result'}>
+                <ChartNoAxesCombined className="mr-2 h-4 w-4" />
+                <span>Live Result</span>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuItem onClick={handleLogout}>

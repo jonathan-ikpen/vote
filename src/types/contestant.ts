@@ -10,3 +10,13 @@ export interface ContestantData {
     isDisabled: boolean;
     onVote: () => void;
 }
+
+// { name: 'Adebayo Oluwaseun', image: 'boy1', position: 'president', tagline: '', id: 0 }
+
+export interface ContestantTypes {
+    id: number
+    name: string
+    image: string
+    position: string
+    tagline: string
+}
