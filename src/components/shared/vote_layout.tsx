@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
 import { filterRolesObj, formatRoleStr } from "@/lib/utils"
 import { ContestantTypes } from "@/types/contestant"
 
-export function VoteLayout({ roles, contestants, children, showbutton = true }: {roles: string[], contestants: ContestantTypes[], children: (contestant: any) => React.ReactNode, showbutton?: boolean }) {
+export function VoteLayout({ roles, contestants, children, showbutton = true, handleSave }: {roles: string[], contestants: ContestantTypes[], children: (contestant: any) => React.ReactNode, showbutton?: boolean, handleSave?: (role: string) => void }) {
 
   return (
     <Tabs defaultValue="president">
@@ -28,7 +28,7 @@ export function VoteLayout({ roles, contestants, children, showbutton = true }: 
                                 {filterRolesObj(contestants, role).map((contestant) => children(contestant))}
                             </CardContent>
                             {showbutton && (<CardFooter className="border-t px-6 py-4">
-                                <Button>Save</Button>
+                                <Button onClick={() => handleSave && handleSave(role)}>Save</Button>
                             </CardFooter>)}
                         </Card>
                     </TabsContent>
