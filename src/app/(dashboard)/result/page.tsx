@@ -1,5 +1,7 @@
+import { ResultsContent } from "./_components/result"
+
 export default function Results() {
     return (
-        <div></div>
+        <ResultsContent/>
     )
 }
