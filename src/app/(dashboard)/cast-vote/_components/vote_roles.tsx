@@ -2,25 +2,12 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
 import { roles } from "@/data/roles"
 import { ConstetantCard } from "@/components/shared/contestant_card"
-import Image from "../../../../public/images/girl1.jpg"
 import { contestants } from "@/data/contestants"
-import { filterRolesObj, filterRolesStr, formatRoleStr } from "@/lib/utils"
+import { filterRolesObj, formatRoleStr } from "@/lib/utils"
 import { useVoterStore } from "@/store/voter"
 import toast from "react-hot-toast"
 
@@ -31,15 +18,11 @@ export function RoleTabs() {
     const imagePath = "/images/"
 
     useEffect(() => {
-        // This will log the correct contestants_voted after each update
         console.log("Updated contestants_voted:", contestants_voted);
       }, [contestants_voted]);
 
     function handleVote(name: string, position: string) {
-        setSelectedContestants((prev) => ({
-            ...prev,
-            [position]: name, // Update only the contestant for the specific position
-          }));
+        setSelectedContestants((prev) => ({ ...prev, [position]: name,}));
         vote({ [position]: name })
     }
 
