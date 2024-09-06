@@ -25,19 +25,14 @@ import {
 export function ContestantRoleContent({ roles, contestants}: {roles: string[], contestants: ContestantTypes[] }) {
     const { vote, contestants_voted } = useVoterStore()
     const [selectedContestants, setSelectedContestants] = useState<{ [key: string]: string }>({});
-    const presidents = filterRolesObj(contestants, "president");
     const imagePath = "/images/"
 
     useEffect(() => {
-        // This will log the correct contestants_voted after each update
-        console.log("Updated contestants_voted:", contestants_voted);
+        // console.log("Updated contestants_voted:", contestants_voted);
     }, [contestants_voted]);
 
     function handleVote(name: string, position: string) {
-        setSelectedContestants((prev) => ({
-            ...prev,
-            [position]: name, // Update only the contestant for the specific position
-          }));
+        setSelectedContestants((prev) => ({ ...prev, [position]: name,}));
         vote({ [position]: name })
     }
 

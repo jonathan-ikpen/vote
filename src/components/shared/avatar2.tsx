@@ -1,7 +1,7 @@
 "use client"
 
 import { useVoterStore } from "@/store/voter"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 import {
     Avatar,
@@ -15,6 +15,7 @@ import {
     LogOut,
     Settings,
     User,
+    UserCheck,
     CircleHelp,
     ChartNoAxesCombined
   } from "lucide-react"
@@ -38,12 +39,18 @@ import Link from "next/link"
   
   export default function AvatarDropDown() {
     const router = useRouter()
+    const pathname = usePathname()
     const { voterId, logout } = useVoterStore();
+
+    const castVotePage = pathname == "/cast-vote";
+    const liveResultPage = pathname == "/result";
 
     function handleLogout () {
       logout()
       router.push('/')
     }
+
+    console.log(pathname)
 
     return (
       <DropdownMenu>
@@ -73,12 +80,26 @@ import Link from "next/link"
                 <span>Help</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href={'/result'}>
-                <ChartNoAxesCombined className="mr-2 h-4 w-4" />
-                <span>Live Result</span>
-              </Link>
-            </DropdownMenuItem>
+           {castVotePage && 
+              (
+                <DropdownMenuItem asChild>
+                    <Link href={'/result'}>
+                      <ChartNoAxesCombined className="mr-2 h-4 w-4" />
+                      <span>Live Result</span>
+                    </Link>
+                </DropdownMenuItem>
+              )
+            }
+           {liveResultPage && 
+              (
+                <DropdownMenuItem asChild>
+                  <Link href={'/cast-vote'}>
+                    <UserCheck className="mr-2 h-4 w-4" />
+                    <span>Vote</span>
+                  </Link>
+                </DropdownMenuItem>
+              )
+            }
           </DropdownMenuGroup>
           <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
