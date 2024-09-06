@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import LogoNosh from "../../../public/logo-no-sh.png"
 import CountdownTimer from "./timer";
 import { useVoterStore } from "@/store/voter";
-import AvatarDropDown from "./avatar2";
+import AvatarDropDown from "./avatar_dropdown";
 
 const HomeHeader = () => {
     const {isAuthenticated} = useVoterStore();
