@@ -13,8 +13,7 @@ import { useVoterStore } from "@/store/voter"
 
 export function ConstetantCard({id, name, tagline, position, imagesrc, isDisabled, onVote }: ContestantData) {
   return (
-    <Card className="w-[300px]" data-position={position}>
-      
+    <Card key={id} className="w-[300px]" data-position={position}>
       <CardContent className="w-full px-4 pt-4">
         <Image src={imagesrc} alt={name} width={300} height={300} className="rounded-lg" />
       </CardContent>

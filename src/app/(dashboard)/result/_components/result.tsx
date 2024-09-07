@@ -8,7 +8,7 @@ export function ResultsContent() {
   return (
     <VoteLayout roles={roles} contestants={contestants} showbutton={false}>
       {(contestant) => (
-        <div></div>
+        <div key={contestant.id}></div>
       )}
     </VoteLayout>
   )
