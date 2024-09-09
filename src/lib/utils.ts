@@ -1,3 +1,4 @@
+import { CandidateVotes } from "@/types/contestant";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -16,4 +17,20 @@ export function filterRolesStr(arr: string[], query: string) {
 
 export function formatRoleStr(str: string) {
   return str.split("_").join(" ");
+}
+
+
+
+export function getLeadingCandidateWithPercentageDifference(candidates: CandidateVotes[]): string {
+  if (candidates.length < 2) {
+      return "";
+  }
+  const sortedCandidates = candidates.sort((a, b) => b.votes - a.votes);
+
+  const leadingCandidate = sortedCandidates[0];
+  const secondCandidate = sortedCandidates[1];
+
+  const percentIncrease = ((leadingCandidate.votes - secondCandidate.votes) / secondCandidate.votes) * 100;
+
+  return `${leadingCandidate.name} is leading by ${percentIncrease.toFixed(2)}%.`;
 }

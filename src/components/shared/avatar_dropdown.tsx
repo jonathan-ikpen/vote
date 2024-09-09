@@ -37,7 +37,7 @@ export default function AvatarDropDown() {
                 <span>Help</span>
               </Link>
             </DropdownMenuItem>
-           {castVotePage && 
+           {!liveResultPage && 
               (
                 <DropdownMenuItem asChild>
                     <Link href={'/result'}>
@@ -47,7 +47,7 @@ export default function AvatarDropDown() {
                 </DropdownMenuItem>
               )
             }
-           {liveResultPage && 
+           {!castVotePage && 
               (
                 <DropdownMenuItem asChild>
                   <Link href={'/cast-vote'}>

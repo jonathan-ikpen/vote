@@ -4,15 +4,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, 
 import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
 import { filterRolesObj, formatRoleStr } from "@/lib/utils"
 import { ContestantTypes } from "@/types/contestant"
+import { VoteLayoutTypes } from "@/types/layout"
 
-export function VoteLayout({ roles, contestants, children, showbutton = true, handleSave }: {roles: string[], contestants: ContestantTypes[], children: (contestant: any) => React.ReactNode, showbutton?: boolean, handleSave?: (role: string) => void }) {
+export function VoteLayout({ roles, contestants, children, data, showbutton = true, handleSave }: VoteLayoutTypes) {
 
   return (
     <Tabs defaultValue="president">
         <div className="grid w-full items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
             <TabsList className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0">
                 {roles.map((role) => (
-                    <TabsTrigger className="text-left" value={role} key={role}>
+                    <TabsTrigger className=" text-left" value={role} key={role}>
                         <Link href={`#${role}`} className="font-semibold text-primary">{formatRoleStr(role)}</Link>   
                     </TabsTrigger>
                 ))}
@@ -24,9 +25,12 @@ export function VoteLayout({ roles, contestants, children, showbutton = true, ha
                             <CardHeader>
                                 <CardTitle>{formatRoleStr(role)}</CardTitle>
                             </CardHeader>
-                            <CardContent className="flex gap-8 flex-wrap">
+                            {children && <CardContent className="flex gap-8 flex-wrap">
                                 {filterRolesObj(contestants, role).map((contestant) => children(contestant))}
-                            </CardContent>
+                            </CardContent>}
+                            {data && <CardContent className="flex gap-8 flex-wrap justify-center items-center">
+                                {data(filterRolesObj(contestants, role))}
+                            </CardContent>}
                             {showbutton && (<CardFooter className="border-t px-6 py-4">
                                 <Button onClick={() => handleSave && handleSave(role)}>Save</Button>
                             </CardFooter>)}

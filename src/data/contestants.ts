@@ -1,44 +1,44 @@
 export const contestants = [
     // SUG Contestants
-    { name: 'Adebayo Oluwaseun', image: 'boy1', position: 'president', tagline: '', id: 0 },
-    { name: 'Chukwuemeka Eze', image: 'girl1', position: 'president', tagline: '', id: 1 },
-    { name: 'Fatimah Ibrahim', image: 'girl3', position: 'president', tagline: '', id: 2 },
+    { name: 'Adebayo Oluwaseun', image: 'boy1', position: 'president', tagline: '', votes: 100, id: 0 },
+    { name: 'Chukwuemeka Eze', image: 'girl1', position: 'president', tagline: '', votes: 300, id: 1 },
+    { name: 'Fatimah Ibrahim', image: 'girl3', position: 'president', tagline: '', votes: 200, id: 2 },
     
-    { name: 'Nkechi Okeke', image: 'girl3', position: 'vice_president', tagline: '', id: 3 },
-    { name: 'Abubakar Aliyu', image: 'girl4', position: 'vice_president', tagline: '', id: 4 },
-    { name: 'Yemi Olagunju', image: 'girl5', position: 'vice_president', tagline: '', id: 5 },
+    { name: 'Nkechi Okeke', image: 'girl3', position: 'vice_president', tagline: '', votes: 145, id: 3 },
+    { name: 'Abubakar Aliyu', image: 'girl4', position: 'vice_president', tagline: '', votes: 70, id: 4 },
+    { name: 'Yemi Olagunju', image: 'girl5', position: 'vice_president', tagline: '', votes: 80, id: 5 },
     
-    { name: 'Tope Afolabi', image: 'girl6', position: 'sec_general', tagline: '', id: 6 },
-    { name: 'Oluwatosin Balogun', image: 'ai1', position: 'sec_general', tagline: '', id: 7 },
-    { name: 'Grace Nwosu', image: 'ai2', position: 'sec_general', tagline: '', id: 8 },
+    { name: 'Tope Afolabi', image: 'girl6', position: 'sec_general', tagline: '', votes: 200, id: 6 },
+    { name: 'Oluwatosin Balogun', image: 'ai1', position: 'sec_general', tagline: '', votes: 150, id: 7 },
+    { name: 'Grace Nwosu', image: 'ai2', position: 'sec_general', tagline: '', votes: 80, id: 8 },
     
-    { name: 'Emeka Chukwuma', image: 'boy1', position: 'sport_director', tagline: '', id: 9 },
-    { name: 'Ifeanyi Okoye', image: 'girl1', position: 'sport_director', tagline: '', id: 10 },
-    { name: 'Abiola Ajayi', image: 'girl2', position: 'sport_director', tagline: '', id: 11 },
+    { name: 'Emeka Chukwuma', image: 'boy1', position: 'sport_director', tagline: '', votes: 45, id: 9 },
+    { name: 'Ifeanyi Okoye', image: 'girl1', position: 'sport_director', tagline: '', votes: 70, id: 10 },
+    { name: 'Abiola Ajayi', image: 'girl2', position: 'sport_director', tagline: '', votes: 20, id: 11 },
     
-    { name: 'Chinonso Okoro', image: 'girl3', position: 'financial_secretary', tagline: '', id: 12 },
-    { name: 'Aminu Suleiman', image: 'girl4', position: 'financial_secretary', tagline: '', id: 13 },
-    { name: 'Ngozi Ndukwe', image: 'girl5', position: 'financial_secretary', tagline: '', id: 14 },
+    { name: 'Chinonso Okoro', image: 'girl3', position: 'financial_secretary', tagline: '', votes: 120, id: 12 },
+    { name: 'Aminu Suleiman', image: 'girl4', position: 'financial_secretary', tagline: '', votes: 65, id: 13 },
+    { name: 'Ngozi Ndukwe', image: 'girl5', position: 'financial_secretary', tagline: '', votes: 100, id: 14 },
     
-    { name: 'Funmi Adeyemi', image: 'girl6', position: 'social_director', tagline: '', id: 15 },
-    { name: 'Ebube Obi', image: 'ai1', position: 'social_director', tagline: '', id: 16 },
-    { name: 'Tosin Ogunleye', image: 'ai2', position: 'social_director', tagline: '', id: 17 },
+    { name: 'Funmi Adeyemi', image: 'girl6', position: 'social_director', tagline: '', votes: 200, id: 15 },
+    { name: 'Ebube Obi', image: 'ai1', position: 'social_director', tagline: '', votes: 100, id: 16 },
+    { name: 'Tosin Ogunleye', image: 'ai2', position: 'social_director', tagline: '', votes: 80, id: 17 },
     
-    { name: 'Ibrahim Yusuf', image: 'girl1', position: 'welfarer', tagline: '', id: 18 },
-    { name: 'Amaka Chukwuka', image: 'girl2', position: 'welfarer', tagline: '', id: 19 },
-    { name: 'Femi Akinlade', image: 'girl3', position: 'welfarer', tagline: '', id: 20 },
+    { name: 'Ibrahim Yusuf', image: 'girl1', position: 'welfarer', tagline: '', votes: 400, id: 18 },
+    { name: 'Amaka Chukwuka', image: 'girl2', position: 'welfarer', tagline: '', votes: 250, id: 19 },
+    { name: 'Femi Akinlade', image: 'girl3', position: 'welfarer', tagline: '', votes: 120, id: 20 },
     
-    { name: 'Ugochi Nwankwo', image: 'girl4', position: 'general_assistant', tagline: '', id: 21 },
-    { name: 'Bashir Mohammed', image: 'girl5', position: 'general_assistant', tagline: '', id: 22 },
-    { name: 'Kemi Alade', image: 'girl6', position: 'general_assistant', tagline: '', id:23  },
+    { name: 'Ugochi Nwankwo', image: 'girl4', position: 'general_assistant', tagline: '', votes: 78, id: 21 },
+    { name: 'Bashir Mohammed', image: 'girl5', position: 'general_assistant', tagline: '', votes: 130, id: 22 },
+    { name: 'Kemi Alade', image: 'girl6', position: 'general_assistant', tagline: '', votes: 100, id:23  },
     
-    { name: 'Tunde Bakare', image: 'ai1', position: 'financial_secretary_assistant', tagline: '', id: 24 },
-    { name: 'Chika Nnaji', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', id: 25 },
-    { name: 'Abdullahi Usman', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', id: 26 },
+    { name: 'Tunde Bakare', image: 'ai1', position: 'financial_secretary_assistant', tagline: '', votes: 90, id: 24 },
+    { name: 'Chika Nnaji', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', votes: 40, id: 25 },
+    { name: 'Abdullahi Usman', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', votes: 40, id: 26 },
     
-    { name: 'Olawale Ojo', image: 'girl1', position: 'welfarer_assistant', tagline: '', id: 27 },
-    { name: 'Nkiru Anya', image: 'girl2', position: 'welfarer_assistant', tagline: '', id: 28 },
-    { name: 'Tobi Obafemi', image: 'girl3', position: 'welfarer_assistant', tagline: '', id: 29 },
+    { name: 'Olawale Ojo', image: 'girl1', position: 'welfarer_assistant', tagline: '', votes: 70, id: 27 },
+    { name: 'Nkiru Anya', image: 'girl2', position: 'welfarer_assistant', tagline: '', votes: 80, id: 28 },
+    { name: 'Tobi Obafemi', image: 'girl3', position: 'welfarer_assistant', tagline: '', votes: 67, id: 29 },
     
 ];
 

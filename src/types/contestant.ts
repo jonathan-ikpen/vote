@@ -9,6 +9,7 @@ export interface ContestantData {
     imagesrc: string
     isDisabled: boolean;
     onVote: () => void;
+    votes?: number
 }
 
 // { name: 'Adebayo Oluwaseun', image: 'boy1', position: 'president', tagline: '', id: 0 }
@@ -19,4 +20,10 @@ export interface ContestantTypes {
     image: string
     position: string
     tagline: string
+    votes?: number
 }
+
+export interface CandidateVotes {
+    name: string;
+    votes: number;
+  }
