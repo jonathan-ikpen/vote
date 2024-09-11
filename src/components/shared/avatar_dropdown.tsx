@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/avatar"
 import { Cloud, CreditCard, LogOut, Settings, User, UserCheck, CircleHelp, ChartNoAxesCombined } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { HELP_LINK } from "../../../constant"
   
 export default function AvatarDropDown() {
     const router = useRouter()
@@ -32,7 +33,7 @@ export default function AvatarDropDown() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
-              <Link href={'https://wa.me/2348127964509'} target="blank">
+              <Link href={HELP_LINK} target="blank">
                 <CircleHelp className="mr-2 h-4 w-4" />
                 <span>Help</span>
               </Link>

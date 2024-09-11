@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+
 export function filterRolesObj(arr: { [key: string]: any }[], position: string) {
   return arr.filter((item) => item.position.toLowerCase().trim() === position.toLowerCase().trim());
 }

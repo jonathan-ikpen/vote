@@ -8,9 +8,9 @@ export const contestants = [
     { name: 'Abubakar Aliyu', image: 'girl4', position: 'vice_president', tagline: '', votes: 70, id: 4 },
     { name: 'Yemi Olagunju', image: 'girl5', position: 'vice_president', tagline: '', votes: 80, id: 5 },
     
-    { name: 'Tope Afolabi', image: 'girl6', position: 'sec_general', tagline: '', votes: 200, id: 6 },
-    { name: 'Oluwatosin Balogun', image: 'ai1', position: 'sec_general', tagline: '', votes: 150, id: 7 },
-    { name: 'Grace Nwosu', image: 'ai2', position: 'sec_general', tagline: '', votes: 80, id: 8 },
+    { name: 'Tope Afolabi', image: 'girl6', position: 'secretary_general', tagline: '', votes: 200, id: 6 },
+    { name: 'Oluwatosin Balogun', image: 'ai1', position: 'secretary_general', tagline: '', votes: 150, id: 7 },
+    { name: 'Grace Nwosu', image: 'ai2', position: 'secretary_general', tagline: '', votes: 80, id: 8 },
     
     { name: 'Emeka Chukwuma', image: 'boy1', position: 'sport_director', tagline: '', votes: 45, id: 9 },
     { name: 'Ifeanyi Okoye', image: 'girl1', position: 'sport_director', tagline: '', votes: 70, id: 10 },
@@ -28,17 +28,17 @@ export const contestants = [
     { name: 'Amaka Chukwuka', image: 'girl2', position: 'welfarer', tagline: '', votes: 250, id: 19 },
     { name: 'Femi Akinlade', image: 'girl3', position: 'welfarer', tagline: '', votes: 120, id: 20 },
     
-    { name: 'Ugochi Nwankwo', image: 'girl4', position: 'general_assistant', tagline: '', votes: 78, id: 21 },
-    { name: 'Bashir Mohammed', image: 'girl5', position: 'general_assistant', tagline: '', votes: 130, id: 22 },
-    { name: 'Kemi Alade', image: 'girl6', position: 'general_assistant', tagline: '', votes: 100, id:23  },
+    { name: 'Ugochi Nwankwo', image: 'girl4', position: 'treasurer', tagline: '', votes: 78, id: 21 },
+    { name: 'Bashir Mohammed', image: 'girl5', position: 'treasurer', tagline: '', votes: 130, id: 22 },
+    { name: 'Kemi Alade', image: 'girl6', position: 'treasurer', tagline: '', votes: 100, id:23  },
     
-    { name: 'Tunde Bakare', image: 'ai1', position: 'financial_secretary_assistant', tagline: '', votes: 90, id: 24 },
-    { name: 'Chika Nnaji', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', votes: 40, id: 25 },
-    { name: 'Abdullahi Usman', image: 'ai2', position: 'financial_secretary_assistant', tagline: '', votes: 40, id: 26 },
+    { name: 'Tunde Bakare', image: 'ai1', position: 'assistant_secretary_general', tagline: '', votes: 90, id: 24 },
+    { name: 'Chika Nnaji', image: 'ai2', position: 'assistant_secretary_general', tagline: '', votes: 40, id: 25 },
+    { name: 'Abdullahi Usman', image: 'ai2', position: 'assistant_secretary_general', tagline: '', votes: 40, id: 26 },
     
-    { name: 'Olawale Ojo', image: 'girl1', position: 'welfarer_assistant', tagline: '', votes: 70, id: 27 },
-    { name: 'Nkiru Anya', image: 'girl2', position: 'welfarer_assistant', tagline: '', votes: 80, id: 28 },
-    { name: 'Tobi Obafemi', image: 'girl3', position: 'welfarer_assistant', tagline: '', votes: 67, id: 29 },
+    { name: 'Olawale Ojo', image: 'girl1', position: 'public_relations_officer', tagline: '', votes: 70, id: 27 },
+    { name: 'Nkiru Anya', image: 'girl2', position: 'public_relations_officer', tagline: '', votes: 80, id: 28 },
+    { name: 'Tobi Obafemi', image: 'girl3', position: 'public_relations_officer', tagline: '', votes: 67, id: 29 },
     
 ];
 

@@ -11,7 +11,7 @@ const HomeHeader = () => {
     const {isAuthenticated} = useVoterStore();
 
   return (
-        <div className="fsticky absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
+        <div className="fsticky z-40 absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
             <Link href={'/'}>
             <h1 className="text-xl font-bold text-center flex gap-2 items-center ">
                 Pti<Image src={LogoNosh} width={70} alt={'Logo'} className=" fopacity-0 " />

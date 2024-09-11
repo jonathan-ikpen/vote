@@ -36,18 +36,33 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useState } from "react"
+import toast from "react-hot-toast"
 
 const formSchema = z.object({
-    fname: z.string(),
-    lname: z.string(),
-    matno: z.string(),
-    phone: z.string(),
-    gender: z.string(),
+    fname: z.string().min(2, {
+        message: "Firstname must be at least 2 characters.",
+      }),
+    lname: z.string().min(2, {
+        message: "Lastname must be at least 2 characters.",
+      }),
+    matno: z.string().min(2, {
+        message: "Matnumber must be at least 2 characters.",
+      }),
+    phone: z.string().min(2, {
+        message: "Phone number is not valid",
+      }),
+    gender: z.string().min(2, {
+        message: "Select gender",
+      }),
     email: z.string().email(),
-    department: z.string(),
+    department: z.string().min(2, {
+        message: "Select department",
+      }),
   })
 
-export function RegisterForm() {
+export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, name: string ) => void }) {
+    const [btn, setBtn] = useState({ loading: false, message: "Register"})
 
     // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,13 +79,19 @@ export function RegisterForm() {
   })
  
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit (values: z.infer<typeof formSchema>) {
+    setBtn({ loading: true, message: "Loading"})
     console.log(values)
+    setBtn({ loading: false, message: "Redirecting..."})
+    toast.success("Submitted")
+    setTimeout(() => {
+        onSuccess(true, values.fname)
+    }, 5000)
   }
 
   return (
     <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mx-5">
         <Card className="mx-auto max-w-3xl w-full">
             <CardHeader>
                 <CardTitle className="text-xl">Register</CardTitle>
@@ -80,125 +101,125 @@ export function RegisterForm() {
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
-                    <div className="grid grid-cols-2 gap-20">
+                    <div className="grid grid-cols-2 gap-5 md:gap-20">
                         <FormField control={form.control} name="fname"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>First name</FormLabel>
+                                <FormItem className="space-y-1 text-sm">
+                                    <FormLabel className="text-sm">First name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Max" {...field} />
+                                        <Input placeholder="Max" {...field} className="text-sm" />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                         <FormField control={form.control} name="lname"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Last name</FormLabel>
+                                <FormItem className="space-y-1">
+                                    <FormLabel className="text-sm">Last name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Robinson" {...field} />
+                                        <Input placeholder="Robinson" {...field} className="text-sm" />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-20">
+                    <div className="grid grid-cols-2 gap-5 md:gap-20">
                         <FormField control={form.control} name="matno"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Matric Number</FormLabel>
+                                <FormItem className="space-y-1">
+                                    <FormLabel className="text-sm">Matric Number</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="M.24/ND/PEG/12345" {...field} />
+                                        <Input placeholder="M.24/ND/PEG/12345" {...field} className="text-sm" />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                         <FormField control={form.control} name="phone"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Phone Number</FormLabel>
+                                <FormItem className="space-y-1">
+                                    <FormLabel className="text-sm">Phone Number</FormLabel>
                                     <FormControl>
-                                        <Input type="tel" placeholder="(080) 0000 0000" {...field} />
+                                        <Input type="tel" placeholder="(080) 0000 0000" {...field} className="text-sm" />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-20">
+                    <div className="grid grid-cols-2 gap-5 md:gap-20">
                         <FormField control={form.control} name="gender"
                             render={({ field }) => (
-                                <FormItem>
-                                <FormLabel>Gender</FormLabel>
+                                <FormItem className="space-y-1">
+                                <FormLabel className="text-sm">Gender</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select gender" />
+                                        <SelectValue placeholder="Select gender" className="!text-sm" />
                                     </SelectTrigger>
                                     </FormControl>
-                                    <SelectContent>
+                                    <SelectContent className="text-sm">
                                         <SelectGroup>
-                                            <SelectLabel>gender</SelectLabel>
-                                            <SelectItem value="male">Male</SelectItem>
-                                            <SelectItem value="female">Female</SelectItem>
+                                            <SelectLabel className="text-sm">gender</SelectLabel>
+                                            <SelectItem value="male" className="text-sm">Male</SelectItem>
+                                            <SelectItem value="female" className="text-sm">Female</SelectItem>
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                                <FormMessage />
+                                <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                         <FormField control={form.control} name="email"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                <FormItem className="space-y-1">
+                                    <FormLabel className="text-sm">Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="m@example.com" {...field} />
+                                        <Input placeholder="m@example.com" {...field} className="text-sm" />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                 </FormItem>
                             )}
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-20 items-end">
+                    <div className="grid grid-cols-2 gap-5 md:gap-20 items-end">
                         <FormField control={form.control} name="department"
                                 render={({ field }) => (
-                                    <FormItem>
-                                    <FormLabel>Department</FormLabel>
+                                    <FormItem className="space-y-1">
+                                    <FormLabel className="text-sm">Department</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select department" />
+                                            <SelectValue placeholder="Select department" className="!text-sm" />
                                         </SelectTrigger>
                                         </FormControl>
-                                        <SelectContent>
-                                            <SelectGroup>
-                                                <SelectLabel>departement</SelectLabel>
-                                                <SelectItem value="EEED">Electrical & Electronic Engineering Technology</SelectItem>
-                                                <SelectItem value="PET">Petroleum Engineering Technology</SelectItem>
-                                                <SelectItem value="PNGPD">Petroleum and Natural Gas Processing Technology</SelectItem>
-                                                <SelectItem value="MED">Mechanical Engineering Technology</SelectItem>
-                                                <SelectItem value="WEOD">Welding Engineering & Offshore Technology</SelectItem>
-                                                <SelectItem value="CSIT">Computer Science & Information Technology</SelectItem>
-                                                <SelectItem value="PMBS">Petroleum Marketing & Business Studies</SelectItem>
-                                                <SelectItem value="ISET">Industrial Safety & Environmental Technology</SelectItem>
-                                                <SelectItem value="SLT">Science Laboratory Technology</SelectItem>
-                                                <SelectItem value="CET">Computer Engineering Technology</SelectItem>
-                                                <SelectItem value="MET">Mechatronics Engineering Technology</SelectItem>
-                                                <SelectItem value="ESMT">Environmental Science & Management Technology</SelectItem>
+                                        <SelectContent className="text-sm">
+                                            <SelectGroup className="text-sm">
+                                                <SelectLabel className="text-sm">departement</SelectLabel>
+                                                <SelectItem value="EEED" className="text-sm">Electrical & Electronic Engineering Technology</SelectItem>
+                                                <SelectItem value="PET" className="text-sm">Petroleum Engineering Technology</SelectItem>
+                                                <SelectItem value="PNGPD" className="text-sm">Petroleum and Natural Gas Processing Technology</SelectItem>
+                                                <SelectItem value="MED" className="text-sm">Mechanical Engineering Technology</SelectItem>
+                                                <SelectItem value="WEOD" className="text-sm">Welding Engineering & Offshore Technology</SelectItem>
+                                                <SelectItem value="CSIT" className="text-sm">Computer Science & Information Technology</SelectItem>
+                                                <SelectItem value="PMBS" className="text-sm">Petroleum Marketing & Business Studies</SelectItem>
+                                                <SelectItem value="ISET" className="text-sm">Industrial Safety & Environmental Technology</SelectItem>
+                                                <SelectItem value="SLT" className="text-sm">Science Laboratory Technology</SelectItem>
+                                                <SelectItem value="CET" className="text-sm">Computer Engineering Technology</SelectItem>
+                                                <SelectItem value="MET" className="text-sm">Mechatronics Engineering Technology</SelectItem>
+                                                <SelectItem value="ESMT" className="text-sm">Environmental Science & Management Technology</SelectItem>
                                             </SelectGroup>
                                         </SelectContent>
                                     </Select>
-                                    <FormMessage />
+                                    <FormMessage className="!text-[10px]" />
                                     </FormItem>
                                 )}
                             />
                         <div className="grid gap-2">
-                            <Button type="submit" className="w-full">
-                                Register
+                            <Button type="submit" className="w-full text-sm" disabled={btn.loading}>
+                                {btn.message}
                             </Button>
                         </div>
                     </div>

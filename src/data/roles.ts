@@ -1,11 +1,12 @@
 export const roles = [
     "president",
     "vice_president",
-    "sec_general",
+    "secretary_general",
     "sport_director",
     "financial_secretary",
-    "financial_secretary_assistant",
     "social_director",
     "welfarer",
-    "welfarer_assistant",
+    "treasurer",
+    "assistant_secretary_general",
+    "public_relations_officer"
   ]

@@ -1,7 +1,7 @@
-import { RegisterForm } from "./_components/register_form"
+import Register from "./_components"
 
 export default function RegisterPage() {
     return (
-        <RegisterForm/>
+        <Register/>
     )
 }
