@@ -9,7 +9,7 @@ export default function SuccessRedirect({ name }: { name: string }) {
                 {name}, You Request was Submitted Successfully.
             </h2>
             <p className="max-w-xl mx-auto z-40 text-xs md:text-sm text-neutral-700 dark:text-neutral-400 text-center">
-                An email with your VotersID will be sent to you shortly after you've been approved,
+                An email with your VotersID will be sent to you shortly after you&apos;ve been approved,
                 Please Do not disclose your VotersID anybody. Copy it from the mail and keep it safe till the elections.
                 If you need help contact <Link href={HELP_LINK} className=" underline text-gray-700 ">Admin</Link>
             </p>
