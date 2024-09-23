@@ -1,3 +1,4 @@
+import { RegisterApiType } from "./register"
 
 export interface User {
     voterId: string | null
@@ -16,7 +17,7 @@ export interface ContestantsVoted {
 }
 
 export interface LoggedUser {
-    user: User | null,
+    user: RegisterApiType | null,
     voterId: string | null,
     isAuthenticated: boolean
     loading: boolean,
@@ -33,7 +34,7 @@ export interface StateStorage {
 
 export interface VoterState {
     voterId: string | null
-    user: User | null
+    user: RegisterApiType | null
     isAuthenticated: boolean
     loading: boolean
     error: string | null

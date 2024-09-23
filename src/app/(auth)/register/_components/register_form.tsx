@@ -37,16 +37,18 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState } from "react"
+import { registerVoter } from "@/lib/api/register"
+import { LoaderCircle } from 'lucide-react';
 import toast from "react-hot-toast"
 
 const formSchema = z.object({
-    fname: z.string().min(2, {
+    first_name: z.string().min(2, {
         message: "Firstname must be at least 2 characters.",
       }),
-    lname: z.string().min(2, {
+    last_name: z.string().min(2, {
         message: "Lastname must be at least 2 characters.",
       }),
-    matno: z.string().min(2, {
+    matricnum: z.string().min(2, {
         message: "Matnumber must be at least 2 characters.",
       }),
     phone: z.string().min(2, {
@@ -68,25 +70,35 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fname: "",
-      lname: "",
-      matno: "",
-      phone: "",
-      gender: "",
-      email: "",
-      department: "",
-    },
+        first_name: "",
+        last_name: "",
+        matricnum: "",
+        phone: "",
+        gender: "",
+        email: "",
+        department: ""
+    }
   })
  
   // 2. Define a submit handler.
-  function onSubmit (values: z.infer<typeof formSchema>) {
+  async function onSubmit (values: z.infer<typeof formSchema>) {
     setBtn({ loading: true, message: "Loading"})
-    console.log(values)
-    setBtn({ loading: false, message: "Redirecting..."})
-    toast.success("Submitted")
-    setTimeout(() => {
-        onSuccess(true, values.fname)
-    }, 5000)
+
+    registerVoter(values).then((r) => {
+        if(r.success) {
+            toast.success("Submitted")
+            setBtn({ loading: false, message: "Redirecting..."})
+            onSuccess(true, values.first_name)
+        } else {
+            console.log(r)
+            if('error' in r) {
+                let err = String(r.error.email)
+                setBtn({ loading: false, message: "Register"})
+                toast.error(err.replaceAll('_', ''))
+            } 
+                
+        }
+    })
   }
 
   return (
@@ -102,7 +114,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
             <CardContent>
                 <div className="grid gap-4">
                     <div className="grid grid-cols-2 gap-5 md:gap-20">
-                        <FormField control={form.control} name="fname"
+                        <FormField control={form.control} name="first_name"
                             render={({ field }) => (
                                 <FormItem className="space-y-1 text-sm">
                                     <FormLabel className="text-sm">First name</FormLabel>
@@ -113,7 +125,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
                                 </FormItem>
                             )}
                         />
-                        <FormField control={form.control} name="lname"
+                        <FormField control={form.control} name="last_name"
                             render={({ field }) => (
                                 <FormItem className="space-y-1">
                                     <FormLabel className="text-sm">Last name</FormLabel>
@@ -126,7 +138,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-5 md:gap-20">
-                        <FormField control={form.control} name="matno"
+                        <FormField control={form.control} name="matricnum"
                             render={({ field }) => (
                                 <FormItem className="space-y-1">
                                     <FormLabel className="text-sm">Matric Number</FormLabel>
@@ -218,7 +230,8 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
                                 )}
                             />
                         <div className="grid gap-2">
-                            <Button type="submit" className="w-full text-sm" disabled={btn.loading}>
+                            <Button type="submit" className="w-full flex gap-2 text-sm" disabled={btn.loading}>
+                                { btn.loading ? <LoaderCircle className="animate-spin" /> : "" } {" "}
                                 {btn.message}
                             </Button>
                         </div>

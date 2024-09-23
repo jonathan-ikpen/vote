@@ -10,7 +10,7 @@ import { HELP_LINK } from "../../../constant"
 export default function AvatarDropDown() {
     const router = useRouter()
     const pathname = usePathname()
-    const { voterId, logout } = useVoterStore();
+    const { voterId, user, logout } = useVoterStore();
 
     const castVotePage = pathname == "/cast-vote";
     const liveResultPage = pathname == "/result";
@@ -29,7 +29,7 @@ export default function AvatarDropDown() {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-52 mt-2 mr-4">
-          <DropdownMenuLabel>{voterId ?? "My Account"}</DropdownMenuLabel>
+          <DropdownMenuLabel>{user?.first_name ?? "My Account"}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>

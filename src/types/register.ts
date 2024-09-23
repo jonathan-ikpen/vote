@@ -5,10 +5,22 @@ export interface RegistrationData {
     lastname: string
     matricnum: string
     phone: number
-    dob: Date
+    dob?: Date
     gender: string
     email: string
     department: string
+}
+
+export interface RegisterApiType {
+    first_name: string
+    last_name: string
+    phone: string
+    email: string
+    matricnum: string
+    department: string
+    country?: string
+    date_of_birth?: string
+    gender: string
 }
   
 export interface RegistrationState {

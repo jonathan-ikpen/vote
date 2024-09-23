@@ -2,6 +2,7 @@ import { contestants } from "@/data/contestants";
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { VoterState, ContestantsVoted, LoggedUser, StateStorage } from "@/types/voter";
+import { loginVoter } from "@/lib/api/login";
 import { getCookie, setCookie, deleteCookie } from "@/app/actions";
 
 const initialData: ContestantsVoted = {
@@ -43,29 +44,55 @@ export const useVoterStore = create<VoterState>()(
           login: async (voterId) => {
             set({ loading: true, error: null });
 
-            if(voterId == "admin") {
-               set({
-                user: { voterId },
-                voterId: voterId,
-                isAuthenticated: true
-               });
-               await setCookie(voterId)
-               return {
-                user: { voterId },
-                voterId: voterId,
-                isAuthenticated: true,
-                loading: false,
-                error: null,
-               };
-            } else {
-                return {
-                    user: null,
-                    voterId: null,
-                    isAuthenticated: false,
+            return loginVoter(voterId).then(async (r) => {
+              if(r.success && 'data' in r) {
+                  set({
+                    user: r.data,
+                    voterId: voterId,
+                    isAuthenticated: true
+                  });
+                  await setCookie(voterId)
+                  return {
+                    user: r.data,
+                    voterId: voterId,
+                    isAuthenticated: true,
                     loading: false,
-                    error: 'Invalid Voters ID',
-                }
-            }
+                    error: null,
+                  }
+              } else {
+                  return {
+                      user: null,
+                      voterId: null,
+                      isAuthenticated: false,
+                      loading: false,
+                      error: 'Invalid Voters ID',
+                  }
+              }
+            })
+
+            // if(voterId == "admin") {
+            //    set({
+            //     user: { voterId },
+            //     voterId: voterId,
+            //     isAuthenticated: true
+            //    });
+            //    await setCookie(voterId)
+            //    return {
+            //     user: { voterId },
+            //     voterId: voterId,
+            //     isAuthenticated: true,
+            //     loading: false,
+            //     error: null,
+            //    };
+            // } else {
+            //     return {
+            //         user: null,
+            //         voterId: null,
+            //         isAuthenticated: false,
+            //         loading: false,
+            //         error: 'Invalid Voters ID',
+            //     }
+            // }
           },
           logout: async () => {
             await deleteCookie()
