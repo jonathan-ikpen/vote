@@ -51,22 +51,6 @@ export function getLeadingCandidateWithPercentageDifference(candidates: Candidat
   return `${leadingCandidate.name} is leading by ${percentIncrease.toFixed(2)}%.`;
 }
 
-const voted = [
-  {
-      "id": 21,
-      "contestant": {
-          "id": 3,
-          "name": "Tobi Obafemi",
-          "position": {
-              "id": 1,
-              "name": "president"
-          },
-          "votes": 3
-      },
-      "voted_at": "2024-10-04T22:05:26.006088Z"
-  }
-]
-
 export function getContestantsVoted(voted: any[]) {
   const contestants_voted: any = {};
   voted.map((v) => {
