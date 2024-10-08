@@ -62,6 +62,7 @@ export function SignInForm() {
         toast.error(error)
       };
       if(isAuthenticated) {
+        toast.success("success!")
         setButtontxt("Redirecting...")
         router.push('/cast-vote')
       }

@@ -33,15 +33,18 @@ export interface StateStorage {
 
 
 export interface VoterState {
-    voterId: string | null
+    voterId: string
     user: RegisterApiType | null
     isAuthenticated: boolean
     loading: boolean
     error: string | null
-    contestants_voted: ContestantsVoted
+    contestants_voted: { [key: string]: string }
+    election: any
+    hours: string,
     login: (voterId: string) => Promise<LoggedUser>
     logout: () => Promise<void>
-    vote: (contestantId: Partial<ContestantsVoted>) => void
+    fetchElectionData: () => any
+    vote: (contestantId: Partial<ContestantsVoted>) => Promise<{ status: 'success' | 'error', message: string}>
     unvote: (position: Partial<ContestantsVoted>) => void
     reset: () => void
 }

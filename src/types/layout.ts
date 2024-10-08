@@ -1,7 +1,7 @@
 import { ContestantTypes } from "./contestant"
 
 export interface VoteLayoutTypes {
-    roles: string[] 
+    roles: any[] 
     contestants: ContestantTypes[] 
     children?: (contestant: any) => React.ReactNode
     data?: (contestants: any) => React.ReactElement

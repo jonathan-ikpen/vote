@@ -21,7 +21,7 @@ import { ContestantData } from "@/types/contestant"
 import { ChartTypes } from "@/types/chart"
 import { getLeadingCandidateWithPercentageDifference } from "@/lib/utils"
 
-export const description = "A bar chart with a label"
+export const description = "The Votes Chart"
 
 const chartData = [
   { name: "Adebayo", votes: 186 },

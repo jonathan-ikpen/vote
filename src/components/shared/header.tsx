@@ -6,9 +6,10 @@ import LogoNosh from "../../../public/logo-no-sh.png"
 import CountdownTimer from "./timer";
 import { useVoterStore } from "@/store/voter";
 import AvatarDropDown from "./avatar_dropdown";
+import { useState } from "react";
 
 const HomeHeader = () => {
-    const {isAuthenticated} = useVoterStore();
+    const {isAuthenticated, hours, election} = useVoterStore();
 
   return (
         <div className="fsticky z-40 absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
@@ -32,7 +33,7 @@ const HomeHeader = () => {
             </div>
             <div className={`flex gap-4 items-center ${isAuthenticated ? "flex" : "hidden"}`}>
                 <div>
-                    <CountdownTimer hours={2} stopMessage="Time's up!" />
+                    {hours && <CountdownTimer hours={Number(hours)} stopMessage="Time's up!" />}
                 </div>
                 <div>
                     <AvatarDropDown/>
