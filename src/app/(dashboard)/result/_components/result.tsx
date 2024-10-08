@@ -9,7 +9,7 @@ import { useVoterStore } from "@/store/voter"
 export function ResultsContent() {
   const { election } = useVoterStore()
 
-  return (
+  return election && (
     <VoteLayout roles={election.position} contestants={election.contestants} showbutton={false} data={(contestants) => <Chart contestants={contestants} />} />
   )
 }

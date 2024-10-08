@@ -7,7 +7,6 @@ interface CountdownTimerProps {
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ hours, stopMessage }) => {
-  console.log(hours)
   const [timeLeft, setTimeLeft] = useState<number>(hours * 3600);
   const [isStopped, setIsStopped] = useState<boolean>(false);
 
