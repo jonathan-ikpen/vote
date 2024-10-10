@@ -43,10 +43,15 @@ export function CastVote() {
 
   return election && (
     <VoteLayout roles={election.position} contestants={election.contestants} handleSave={handleSave} showbutton={false}>
-      {(contestant) => (
-        <ConstetantCard key={contestant.id} id={contestant.id} name={contestant.name} imagesrc={contestant.image} tagline={contestant.tagline} position={contestant.position}  isDisabled={contestants_voted[contestant.position] === contestant.id && success}
-        onVote={() => handleVote(contestant.id, contestant.position, contestant.name)} />
-      )}
+      {(contestant) => {
+        const isDisabled = !!contestants_voted[contestant.position]; // Disable if someone is already voted for this position
+        const isVotedFor = contestants_voted[contestant.position] === contestant.id && success; // Check if this contestant is voted for
+
+        return (
+          <ConstetantCard key={contestant.id} id={contestant.id} name={contestant.name} imagesrc={contestant.image} tagline={contestant.tagline} position={contestant.position}  isDisabled={isDisabled || isVotedFor}
+          onVote={() => handleVote(contestant.id, contestant.position, contestant.name)} />
+        )
+      }}
     </VoteLayout>
   )
 }

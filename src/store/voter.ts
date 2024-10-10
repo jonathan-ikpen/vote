@@ -67,6 +67,16 @@ export const useVoterStore = create<VoterState>()(
               }
             })
 
+            if(await election.is_ended) {
+              return {
+                user: null,
+                voterId: "",
+                isAuthenticated: false,
+                loading: false,
+                error: 'Election Ended 😢',
+              }
+            }
+
             return loginVoter(voterId).then(async (r) => {
               if(r.success && 'data' in r) {
                   set({

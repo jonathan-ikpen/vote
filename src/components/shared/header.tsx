@@ -7,6 +7,7 @@ import CountdownTimer from "./timer";
 import { useVoterStore } from "@/store/voter";
 import AvatarDropDown from "./avatar_dropdown";
 import { useState } from "react";
+import { convertToLocalTime } from "@/lib/utils";
 
 const HomeHeader = () => {
     const {isAuthenticated, hours, election} = useVoterStore();
@@ -33,7 +34,8 @@ const HomeHeader = () => {
             </div>
             <div className={`flex gap-4 items-center ${isAuthenticated ? "flex" : "hidden"}`}>
                 <div>
-                    {hours && <CountdownTimer hours={Number(hours)} stopMessage="Time's up!" />}
+                    {/* {hours && <CountdownTimer hours={Number(hours)} stopMessage="Time's up!" />} */}
+                    {election && <CountdownTimer hours={0} stopMessage={`Stop Time: ${convertToLocalTime(election.stop_time)}`} />}
                 </div>
                 <div>
                     <AvatarDropDown/>
