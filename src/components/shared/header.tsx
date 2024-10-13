@@ -6,12 +6,10 @@ import LogoNosh from "../../../public/logo-no-sh.png"
 import CountdownTimer from "./timer";
 import { useVoterStore } from "@/store/voter";
 import AvatarDropDown from "./avatar_dropdown";
-import { useState } from "react";
 import { convertToLocalTime } from "@/lib/utils";
 
 const HomeHeader = () => {
     const {isAuthenticated, hours, election} = useVoterStore();
-    console.log(election.stop_time)
 
   return (
         <div className="fsticky z-40 absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
