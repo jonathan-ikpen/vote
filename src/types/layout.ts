@@ -7,4 +7,5 @@ export interface VoteLayoutTypes {
     data?: (contestants: any) => React.ReactElement
     showbutton?: boolean
     handleSave?: (role: string) => void
+    showMessage?: boolean
 }

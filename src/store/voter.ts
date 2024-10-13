@@ -122,7 +122,6 @@ export const useVoterStore = create<VoterState>()(
             useVoterStore.persist.clearStorage()
           },
           vote: async (contestantId) => {
-            console.log(contestantId);
             set((state) => ({ contestants_voted: {...state.contestants_voted, ...contestantId }}))
 
             return voteContestant(get().voterId, contestantId).then((r) => {

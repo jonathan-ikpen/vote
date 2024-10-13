@@ -6,7 +6,7 @@ import { filterRolesObj, formatRoleStr } from "@/lib/utils"
 import { ContestantTypes } from "@/types/contestant"
 import { VoteLayoutTypes } from "@/types/layout"
 
-export function VoteLayout({ roles, contestants, children, data, showbutton = true, handleSave }: VoteLayoutTypes) {
+export function VoteLayout({ roles, contestants, children, data, showbutton = true, handleSave, showMessage = false }: VoteLayoutTypes) {
 
   return (
     <Tabs defaultValue="president">
@@ -24,6 +24,7 @@ export function VoteLayout({ roles, contestants, children, data, showbutton = tr
                         <Card x-chunk="dashboard-04-chunk-1">
                             <CardHeader>
                                 <CardTitle>{formatRoleStr(role.name)}</CardTitle>
+                                {showMessage && <CardDescription>please note: you can only vote once</CardDescription>}
                             </CardHeader>
                             {children && <CardContent className="flex gap-8 flex-wrap">
                                 {filterRolesObj(contestants, role.name).map((contestant) => children(contestant))}

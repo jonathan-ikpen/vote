@@ -29,13 +29,17 @@ export function CastVote() {
   }, [fetchElectionData])
 
   async function handleVote(id: string, position: string, name: string) {
-    const toastId = toast.loading(`voting ${name}`, { duration: 4000 })
-    setSelectedContestants((prev) => ({ ...prev, [position]: id, }));
-    const { status, message } = await vote({ [position]: id })
-    status == 'success' ? setSucess(true) : setSucess(false)
-    toast[status](`${message}`, {
-        id: toastId,
-    });
+    if (confirm(`Are you sure you want to vote ${name} for ${position}?`) == true) {
+      const toastId = toast.loading(`voting ${name}`, { duration: 4000 })
+      setSelectedContestants((prev) => ({ ...prev, [position]: id, }));
+      const { status, message } = await vote({ [position]: id })
+      status == 'success' ? setSucess(true) : setSucess(false)
+      toast[status](`${message}`, {
+          id: toastId,
+      });
+    } else {
+      return;
+    }
   }
 
   function handleSave(role: string) {
@@ -51,7 +55,7 @@ export function CastVote() {
   }
 
   return election ? (
-    <VoteLayout roles={election.position} contestants={election.contestants} handleSave={handleSave} showbutton={false}>
+    <VoteLayout roles={election.position} contestants={election.contestants} handleSave={handleSave} showbutton={false} showMessage={true}>
       {(contestant) => {
         const isDisabled = !!contestants_voted[contestant.position]; // Disable if someone is already voted for this position
         const isVotedFor = contestants_voted[contestant.position] === contestant.id && success; // Check if this contestant is voted for
