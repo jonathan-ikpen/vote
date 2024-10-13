@@ -47,8 +47,8 @@ export const useVoterStore = create<VoterState>()(
           contestants_voted: {},
           election: null,
           hours: "",
-          fetchElectionData: () => {
-            getElectionData().then(async (r) => {
+          fetchElectionData: async () => {
+            return getElectionData().then(async (r) => {
               if(r.success && 'data' in r) {
                 set({
                   election: r.data[0]
@@ -122,9 +122,10 @@ export const useVoterStore = create<VoterState>()(
             useVoterStore.persist.clearStorage()
           },
           vote: async (contestantId) => {
+            console.log(contestantId);
             set((state) => ({ contestants_voted: {...state.contestants_voted, ...contestantId }}))
 
-            return voteContestant(get().voterId, get().contestants_voted).then((r) => {
+            return voteContestant(get().voterId, contestantId).then((r) => {
               if(r.success && 'data' in r) {
                 return {
                   status: 'success',

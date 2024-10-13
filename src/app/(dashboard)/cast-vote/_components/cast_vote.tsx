@@ -8,12 +8,25 @@ import { useVoterStore } from "@/store/voter"
 import { formatRoleStr } from "@/lib/utils"
 import toast from "react-hot-toast"
 
+interface ElectionData {
+  position: string[] // Assuming roles are an array of strings
+  contestants: any[] // Replace 'any' with a more specific type if available
+}
+
 
 export function CastVote() {
-  const { vote, contestants_voted, user, election } = useVoterStore()
+  const { vote, contestants_voted, fetchElectionData } = useVoterStore()
+  const [election, setElection] = useState<ElectionData | null>(null)
   const [selectedContestants, setSelectedContestants] = useState<{ [key: string]: string }>(contestants_voted);
   const [success, setSucess] = useState(true)
-  const imagePath = "/images/"
+
+  useEffect(() => {
+    const getElectionData = async () => {
+      const data = await fetchElectionData()
+      setElection(data as ElectionData)
+    }
+    getElectionData()
+  }, [fetchElectionData])
 
   async function handleVote(id: string, position: string, name: string) {
     const toastId = toast.loading(`voting ${name}`, { duration: 4000 })
@@ -37,11 +50,7 @@ export function CastVote() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log("Updated contestants_voted:", contestants_voted);
-  // }, [contestants_voted]);
-
-  return election && (
+  return election ? (
     <VoteLayout roles={election.position} contestants={election.contestants} handleSave={handleSave} showbutton={false}>
       {(contestant) => {
         const isDisabled = !!contestants_voted[contestant.position]; // Disable if someone is already voted for this position
@@ -53,5 +62,5 @@ export function CastVote() {
         )
       }}
     </VoteLayout>
-  )
+  ): <div>Loading...</div>
 }
