@@ -23,7 +23,7 @@ export function ConstetantCard({id, name, tagline, position, imagesrc, isDisable
           <CardDescription>{tagline}</CardDescription>
           <Badge variant="outline" className="!text-[10px]">{id}</Badge>
         </div>
-        <Button variant="outline" className="!mt-4" disabled={isDisabled} onClick={onVote}>{isDisabled ? "Voted" : "Vote"}</Button>
+        <Button className={`!mt-4 ${isDisabled ? "bg-red-600" : "bg-green-600 hover:bg-green-800"}`} disabled={isDisabled} onClick={onVote}>{isDisabled ? "Voted" : "Vote"}</Button>
       </CardHeader>
     </Card>
   )

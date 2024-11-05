@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import LogoNosh from "../../../public/logo-no-sh.png"
+import Logo from "../../../public/pti-logo-nbg.png"
 import CountdownTimer from "./timer";
 import { useVoterStore } from "@/store/voter";
 import AvatarDropDown from "./avatar_dropdown";
@@ -14,9 +15,10 @@ const HomeHeader = () => {
   return (
         <div className="fsticky z-40 absolute top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6 justify-between w-full p-6">
             <Link href={'/'}>
-            <h1 className="text-xl font-bold text-center flex gap-2 items-center ">
+            {/* <h1 className="text-xl font-bold text-center flex gap-2 items-center ">
                 Pti<Image src={LogoNosh} width={70} alt={'Logo'} className=" fopacity-0 " />
-            </h1>
+            </h1> */}
+            <Image src={Logo} width={50} alt="pti logo" />
                
             </Link>
             <div className={`flex gap-4 ${isAuthenticated && "hidden"}`}>

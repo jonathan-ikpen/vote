@@ -99,7 +99,7 @@ export function SignInForm() {
         </CardContent>
 
         <CardFooter>
-            <Button className="w-full flex gap-2 fanimate-pulse" disabled={loading}>
+            <Button className="w-full flex gap-2 fanimate-pulse bg-green-600 hover:bg-green-800" disabled={loading}>
               { loading ? <LoaderCircle className="animate-spin" /> : "" } {" "}
               {buttontxt}
             </Button>

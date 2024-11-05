@@ -230,7 +230,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: ( success: boolean, nam
                                 )}
                             />
                         <div className="grid gap-2">
-                            <Button type="submit" className="w-full flex gap-2 text-sm" disabled={btn.loading}>
+                            <Button type="submit" className="w-full flex gap-2 text-sm bg-green-600 hover:bg-green-800" disabled={btn.loading}>
                                 { btn.loading ? <LoaderCircle className="animate-spin" /> : "" } {" "}
                                 {btn.message}
                             </Button>
